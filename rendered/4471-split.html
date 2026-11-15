@@ -9,11 +9,11 @@
 		<link href="../../_app/immutable/chunks/BYAqoTqv.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/CHfFqfNT.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/Bag4TE3p.js" rel="modulepreload">
-		<link href="../../_app/immutable/entry/app.r-0zp0GF.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/app.DxS0D99Q.js" rel="modulepreload">
 		<link href="../../_app/immutable/nodes/0.Izv2btRW.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/DK3Fl9T5.js" rel="modulepreload">
-		<link href="../../_app/immutable/nodes/5.DIv53gcp.js" rel="modulepreload">
-		<link href="../../_app/immutable/chunks/CNOF1ML5.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/5.DTTwcOcv.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/BjvKV1_W.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/DkoUumqI.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/CVBzP17p.js" rel="modulepreload">
 		<link href="../../_app/immutable/chunks/DcZ9TEUN.js" rel="modulepreload">
@@ -23,7 +23,7 @@
 		<link href="../../_app/immutable/assets/_page.8JoRKl6x.css" rel="stylesheet">
   </head>
   <body>
-    <div style="display: contents"><!--[--><!--[--><!--[0--><!--[--><!--[--><!--[-1--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 split · two problems, not one</h1> <p class="meta svelte-e2jw2j"><span>owner <b>support desk</b></span> <span class="status open svelte-e2jw2j">open</span> <span class="svelte-e2jw2j">reviewed 2026-11-15 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/kb/incidents/4471">#4471</a> was merged as one issue: “the parser reads dates month first”. The
+    <div style="display: contents"><!--[--><!--[--><!--[0--><!--[--><!--[--><!--[-1--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 split · two problems, not one</h1> <p class="meta svelte-e2jw2j"><span>owner <b>support desk</b></span> <span class="status closed svelte-e2jw2j">closed</span> <span class="svelte-e2jw2j">reviewed 2026-11-15 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/kb/incidents/4471">#4471</a> was merged as one issue: “the parser reads dates month first”. The
 reports in it hold two different problems. A fix to the parser closes only the first one.</p> <aside class="warn svelte-17bri61"><!---->Not one issue. Two problems, two tickets. Fixing the parser will not stop the second.<!----></aside><!----> <h2>The problems</h2> <p class="sum svelte-1op6c6"><strong>427</strong> rows exported for #4471 · <strong>412</strong> reports once each id is counted once · <strong>2</strong> problems</p> <table><thead><tr><th>problem</th><th>reports</th><th>what the reports show</th><th>tenants</th><th>channels</th><th>intake tagged</th><th>seen</th><th>ticket</th></tr></thead><tbody><!--[--><tr><td><code>parser</code></td><td><strong>379</strong></td><td>day and month swapped: the shared parser reads a day-first date month first</td><td>11</td><td class="small svelte-1op6c6">app ×204 · email ×150 · form ×25</td><td class="small svelte-1op6c6">parser ×356 · hint ×23</td><td class="small svelte-1op6c6">2026-04-01 → 2026-10-04</td><td><!--[0--><a href="https://github.com/TheBit/mega-s01e03-what-it-shows/issues/1">#1</a><!--]--></td></tr><tr><td><code>hint</code></td><td><strong>33</strong></td><td>day and month swapped: booking-v3 prints MM/DD/YYYY under the date field, people type month first, the form reads it day first</td><td>3</td><td class="small svelte-1op6c6">form ×33</td><td class="small svelte-1op6c6">hint ×18 · parser ×15</td><td class="small svelte-1op6c6">2026-04-17 → 2026-09-22</td><td><!--[0--><a href="https://github.com/TheBit/mega-s01e03-what-it-shows/issues/2">#2</a><!--]--></td></tr><!--]--></tbody></table> <!--[--><p class="small svelte-1op6c6">5 of the <code>parser</code> reports were read by the desk as a one-day move (R-41202, R-41209, R-41236, R-41344, R-41620). They come from the same tenants and the same way in, so they are filed under <code>parser</code> and counted there.</p><!--]--><!----> <h2>How each report was placed</h2> <ol><li><strong>Count each report once.</strong> The export pages overlap, so some reports appear twice. One id is
 one report (<code>uniqueById</code>).</li> <li><strong>Place by cause, not by subject or wording.</strong> #4471 was merged on subjects
 (<a href="/kb/decisions/0001-dedupe-by-subject">decision 0001</a>). The cause comes from the tenant and
@@ -32,21 +32,21 @@ sent through a <code>booking-v3</code> form is <code>hint</code>: the form print
 first, and the form reads it day first. Everything else is <code>parser</code>.</li> <li><strong>A different wording is not a different problem.</strong> The desk read a few reports as a one-day
 move (<code>desk-notes.json</code>). They come from the same tenants and channels as the rest, so they stay
 under their cause, footnoted under the table.</li> <li><strong>Ignore the intake tag.</strong> Intake guesses from the reporter’s browser, and people in day-first
-tenants often run a browser set to another locale, such as <code>en-US</code>. The table shows how far the tags are off.</li></ol> <h2>What this changes</h2> <ul><li><strong>parser</strong>: the queued fix for #4471 covers these reports only.</li> <li><strong>hint</strong>: change the hint on <code>booking-v3</code> (or make the form read what the hint says). The parser
-fix does not touch it.</li> <li>Subject-only dedupe merged both. <a href="/kb/decisions/0001-dedupe-by-subject">Decision 0001</a> stays as it is; a new decision record should replace it.</li></ul> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-WX73-1JY7</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!--]--><!--]--><!----><!--]--><!--]--><!--]--><!----> <!--[-1--><!--]--><!--]-->
+tenants often run a browser set to another locale, such as <code>en-US</code>. The table shows how far the tags are off.</li></ol> <h2>Where they stand</h2> <p>Engineering closed #4471 on 5 October.</p> <table><thead><tr><th>problem</th><th>ticket</th><th>outcome</th></tr></thead><tbody><tr><td><code>parser</code></td><td><a href="https://github.com/TheBit/mega-s01e03-what-it-shows/issues/1" rel="nofollow">#1</a></td><td><strong>fixed</strong>: <code>fix(dates): parse dd/mm for eu locales</code></td></tr><tr><td><code>hint</code></td><td><a href="https://github.com/TheBit/mega-s01e03-what-it-shows/issues/2" rel="nofollow">#2</a></td><td><strong>won’t fix</strong>: the <code>booking-v3</code> form is retired</td></tr></tbody></table> <h2>What this changes</h2> <ul><li><strong>parser</strong>: the fix covers these reports only.</li> <li><strong>hint</strong>: the parser fix did not touch it. It ends because <code>booking-v3</code> is retired, not because
+it was fixed. A form that prints a date hint must read dates the way its hint says.</li> <li>Subject-only dedupe merged both. <a href="/kb/decisions/0001-dedupe-by-subject">Decision 0001</a> stays as it is; a new decision record should replace it.</li></ul> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-WX73-1JY7</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!--]--><!--]--><!----><!--]--><!--]--><!--]--><!----> <!--[-1--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_1iw2v1u = {
+					__sveltekit_18n8gnw = {
 						base: new URL("../..", location).pathname.slice(0, -1),
-						version: "1794775011229"
+						version: "1794775866483"
 					};
 
 					const element = document.currentScript.parentElement;
 
 					import("../../_app/immutable/entry/start.CZaYxbvC.js").then(async (kit) => {
-						kit.init(__sveltekit_1iw2v1u);
-						const app = await import("../../_app/immutable/entry/app.r-0zp0GF.js");
+						kit.init(__sveltekit_18n8gnw);
+						const app = await import("../../_app/immutable/entry/app.DxS0D99Q.js");
 						kit.start(app, element, {
 							node_ids: [0, 5],
 							data: [null,null],

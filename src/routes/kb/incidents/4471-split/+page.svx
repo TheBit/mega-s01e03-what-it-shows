@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 split · two problems, not one'
 owner: support desk
-status: open
+status: closed
 reviewed: 2026-11-15
 signature: v1.eyJzdWIiOiI2MDkwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTQ3NzQwODcsImV4cCI6MTc5NDg2MDQ4N30.V7oYGTZ_dkduPG_374N9kWMIP9s9A3S3y1jFOxXWMjo
 ---
@@ -44,11 +44,20 @@ Not one issue. Two problems, two tickets. Fixing the parser will not stop the se
 4. **Ignore the intake tag.** Intake guesses from the reporter's browser, and people in day-first
    tenants often run a browser set to another locale, such as `en-US`. The table shows how far the tags are off.
 
+## Where they stand
+
+Engineering closed #4471 on 5 October.
+
+| problem | ticket | outcome |
+| --- | --- | --- |
+| `parser` | [#1](https://github.com/TheBit/mega-s01e03-what-it-shows/issues/1) | **fixed**: `fix(dates): parse dd/mm for eu locales` |
+| `hint` | [#2](https://github.com/TheBit/mega-s01e03-what-it-shows/issues/2) | **won't fix**: the `booking-v3` form is retired |
+
 ## What this changes
 
-- **parser**: the queued fix for #4471 covers these reports only.
-- **hint**: change the hint on `booking-v3` (or make the form read what the hint says). The parser
-  fix does not touch it.
+- **parser**: the fix covers these reports only.
+- **hint**: the parser fix did not touch it. It ends because `booking-v3` is retired, not because
+  it was fixed. A form that prints a date hint must read dates the way its hint says.
 - Subject-only dedupe merged both. [Decision 0001](/kb/decisions/0001-dedupe-by-subject)
   stays as it is; a new decision record should replace it.
 
