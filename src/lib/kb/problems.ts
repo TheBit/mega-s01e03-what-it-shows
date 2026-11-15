@@ -1,21 +1,21 @@
 // What #4471 really holds: one row per problem, built from the reports on every render.
-// causes.ts says which cause a tenant's report belongs to. It files every report by tenant and
-// channel, so a report that describes a different symptom still lands under `parser`. The desk
-// read those reports (desk-notes.json, `oneDayMove`): the date moved by one day, it did not flip.
-// That is a third problem, and it gets its own ticket.
+// A problem is a cause (causes.ts): the tenant and the way in decide it, not how the reporter
+// described it. Reports the desk read as a one-day move (desk-notes.json, `oneDayMove`) stay with
+// their cause and are footnoted under it (`readAsOneDay`).
 import { causeOf, uniqueById, type Report, type Tenant } from '#lib/kb/causes';
 
-export type Problem = 'parser' | 'hint' | 'one-day' | 'unplaced';
-export const PROBLEMS: readonly Problem[] = ['parser', 'hint', 'one-day', 'unplaced'];
+export type Problem = 'parser' | 'hint' | 'unplaced';
+export const PROBLEMS: readonly Problem[] = ['parser', 'hint', 'unplaced'];
 
-export function problemOf(r: Report, t: Tenant | undefined, oneDayMove: readonly string[]): Problem {
-  if (oneDayMove.includes(r.id)) return 'one-day';
+export function problemOf(r: Report, t: Tenant | undefined): Problem {
   return causeOf(r, t) ?? 'unplaced';
 }
 
 export type ProblemRow = {
   problem: Problem;
   ids: string[];
+  // Of these, reports the desk read as a one-day move.
+  readAsOneDay: string[];
   tenants: number;
   channels: Record<string, number>;
   // What intake tagged these reports as: tag → count. Intake guesses from the browser.
@@ -38,7 +38,7 @@ export function splitTicket(
   const reports = uniqueById(inTicket);
   const by = new Map<Problem, Report[]>();
   for (const r of reports) {
-    const p = problemOf(r, tenantOf(r), oneDayMove);
+    const p = problemOf(r, tenantOf(r));
     by.set(p, [...(by.get(p) ?? []), r]);
   }
   const rows = PROBLEMS.filter((p) => by.has(p)).map((problem) => {
@@ -47,6 +47,7 @@ export function splitTicket(
     return {
       problem,
       ids: rs.map((r) => r.id).sort(),
+      readAsOneDay: rs.filter((r) => oneDayMove.includes(r.id)).map((r) => r.id).sort(),
       tenants: new Set(rs.map((r) => r.tenant)).size,
       channels: tally(rs.map((r) => r.channel)),
       taggedAs: tally(rs.map((r) => r.meta.intakeTag)),

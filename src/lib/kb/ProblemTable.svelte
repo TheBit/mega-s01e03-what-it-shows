@@ -12,7 +12,6 @@
   const WHAT: Record<Problem, string> = {
     parser: 'day and month swapped: the shared parser reads a day-first date month first',
     hint: 'day and month swapped: booking-v3 prints MM/DD/YYYY under the date field, people type month first, the form reads it day first',
-    'one-day': 'the date moves by one day; day and month are not swapped',
     unplaced: 'no day-first tenant on file; cause not known',
   };
   const list = (n: Record<string, number>) =>
@@ -49,8 +48,8 @@
   </tbody>
 </table>
 
-{#each split.rows.filter((r) => r.ids.length <= 10) as row (row.problem)}
-  <p class="small"><code>{row.problem}</code> reports: {row.ids.join(', ')}</p>
+{#each split.rows.filter((r) => r.readAsOneDay.length) as row (row.problem)}
+  <p class="small">{row.readAsOneDay.length} of the <code>{row.problem}</code> reports were read by the desk as a one-day move ({row.readAsOneDay.join(', ')}). They come from the same tenants and the same way in, so they are filed under <code>{row.problem}</code> and counted there.</p>
 {/each}
 
 <style>

@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471 split · three problems, not one'
+title: '#4471 split · two problems, not one'
 owner: support desk
 status: open
 reviewed: 2026-11-15
@@ -16,34 +16,32 @@ signature: v1.eyJzdWIiOiI2MDkwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYX
 </script>
 
 [#4471](/kb/incidents/4471) was merged as one issue: "the parser reads dates month first". The
-reports in it show three different problems. A fix to the parser closes only the first one.
+reports in it hold two different problems. A fix to the parser closes only the first one.
 
 <Callout kind="warn">
-Not one issue. Three problems, three tickets. Fixing the parser will not stop the other two.
+Not one issue. Two problems, two tickets. Fixing the parser will not stop the second.
 </Callout>
 
 ## The problems
 
 <ProblemTable
   ticket={4471}
-  tickets={{ parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` }}
+  tickets={{ parser: `${repo}/1`, hint: `${repo}/2` }}
 />
 
 ## How each report was placed
 
 1. **Count each report once.** The export pages overlap, so some reports appear twice. One id is
    one report (`uniqueById`).
-2. **Read the body, not the subject.** #4471 was merged on subjects
-   ([decision 0001](/kb/decisions/0001-dedupe-by-subject)). Only the body tells a swapped date
-   from a date that moved by one day.
-3. **One-day moves are their own problem.** The desk marked these reports in `desk-notes.json`
-   (`oneDayMove`): the date moved by one day, and day and month were not swapped. `causes.ts`
-   files them under `parser` by tenant, and the old table counts them there. They are not a
-   parser bug.
-4. **The rest go by tenant and channel** (`causes.ts`). Every tenant writes the day first. A report
+2. **Place by cause, not by subject or wording.** #4471 was merged on subjects
+   ([decision 0001](/kb/decisions/0001-dedupe-by-subject)). The cause comes from the tenant and
+   the way the report came in (`causes.ts`). Every tenant writes the day first. A report
    sent through a `booking-v3` form is `hint`: the form prints `MM/DD/YYYY`, people type month
    first, and the form reads it day first. Everything else is `parser`.
-5. **Ignore the intake tag.** Intake guesses from the reporter's browser, and people in day-first
+3. **A different wording is not a different problem.** The desk read a few reports as a one-day
+   move (`desk-notes.json`). They come from the same tenants and channels as the rest, so they stay
+   under their cause, footnoted under the table.
+4. **Ignore the intake tag.** Intake guesses from the reporter's browser, and people in day-first
    tenants often run a browser set to another locale, such as `en-US`. The table shows how far the tags are off.
 
 ## What this changes
@@ -51,9 +49,7 @@ Not one issue. Three problems, three tickets. Fixing the parser will not stop th
 - **parser**: the queued fix for #4471 covers these reports only.
 - **hint**: change the hint on `booking-v3` (or make the form read what the hint says). The parser
   fix does not touch it.
-- **one-day**: not explained yet. The reports point to time zones (one meeting showed Tuesday in
-  Lisbon and Monday in Toronto; an invite arrived before the booking). It needs its own look.
-- Subject-only dedupe merged all three. [Decision 0001](/kb/decisions/0001-dedupe-by-subject)
+- Subject-only dedupe merged both. [Decision 0001](/kb/decisions/0001-dedupe-by-subject)
   stays as it is; a new decision record should replace it.
 
 <RenderStamp {signature} />
